@@ -1,0 +1,4 @@
+name: SimpleVoiceRadio
+version: '1.1'
+main: me.n10b1um.simplevoiceradio.SimpleVoiceRadio
+api-version: '1.21'
