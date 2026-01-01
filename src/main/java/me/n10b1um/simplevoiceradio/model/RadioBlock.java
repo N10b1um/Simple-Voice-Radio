@@ -13,6 +13,8 @@ public class RadioBlock {
         this.frequency = frequency;
     }
 
+    private  RadioBlock() {}
+
     public RadioBlock(Location location, String serverId, RadioType type, int frequency, int range) {
         this.location = location;
         this.serverId = serverId;

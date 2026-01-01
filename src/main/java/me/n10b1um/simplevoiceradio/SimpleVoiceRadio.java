@@ -11,7 +11,14 @@ private RadioManager radioManager;
 
     @Override
     public void onEnable() {
+        if (!getDataFolder().exists()) {
+            getDataFolder().mkdirs();
+        }
+
         this.radioManager = new RadioManager(this);
+
+        this.radioManager.load();
+
         getServer().getPluginManager().registerEvents(new RadioSetupListener(radioManager), this);
         getServer().getPluginManager().registerEvents(new RadioInteractListener(radioManager), this);
         getServer().getPluginManager().registerEvents(new RadioBreakListener(radioManager), this);
@@ -19,6 +26,8 @@ private RadioManager radioManager;
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        if (this.radioManager != null) {
+            this.radioManager.save();
+        }
     }
 }

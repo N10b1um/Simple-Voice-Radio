@@ -1,4 +1,4 @@
-plugins {
+         plugins {
     id 'java'
     id("xyz.jpenilla.run-paper") version "2.3.1"
 }
