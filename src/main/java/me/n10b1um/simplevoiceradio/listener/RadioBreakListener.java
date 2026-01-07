@@ -6,10 +6,11 @@ import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockEvent;
+import org.bukkit.event.block.BlockExplodeEvent;
 
-//TODO УДАЛЯТЬ РАДИО ИЗ ПЯМЯТИ ПРИ ВЗРЫВАХ
 public class RadioBreakListener implements Listener {
-    private RadioManager radioManager;
+    private final RadioManager radioManager;
 
     public RadioBreakListener(RadioManager radioManager) {
         this.radioManager = radioManager;
@@ -17,6 +18,15 @@ public class RadioBreakListener implements Listener {
 
     @EventHandler
     public void onBreak(BlockBreakEvent event) {
+        removeRadioByEvent(event);
+    }
+
+    @EventHandler
+    public void onExplode(BlockExplodeEvent event) {
+        removeRadioByEvent(event);
+    }
+
+    private void removeRadioByEvent(BlockEvent event) {
         Block block = event.getBlock();
         Location location = block.getLocation();
 
