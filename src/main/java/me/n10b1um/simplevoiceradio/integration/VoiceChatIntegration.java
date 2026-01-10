@@ -56,8 +56,6 @@ public class VoiceChatIntegration implements VoicechatPlugin {
         SimpleVoiceRadio plugin = SimpleVoiceRadio.getInstance();
         RadioManager radioManager = plugin.getRadioManager();
 
-        System.out.println("DEBUG: обработка микро для " + player.getName());
-
         Set<Integer> frequencies = radioManager.getNearbyRadioFrequencies(player);
         if (frequencies.isEmpty()) return;
 

@@ -1,5 +1,6 @@
 package me.n10b1um.simplevoiceradio;
 
+import me.n10b1um.simplevoiceradio.config.ConfigManager;
 import me.n10b1um.simplevoiceradio.integration.VoiceChatIntegration;
 import me.n10b1um.simplevoiceradio.listener.RadioBreakListener;
 import me.n10b1um.simplevoiceradio.listener.RadioInteractListener;
@@ -10,6 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class SimpleVoiceRadio extends JavaPlugin {
     private RadioManager radioManager;
     private static SimpleVoiceRadio instance;
+    private ConfigManager configManager;
 
     @Override
     public void onEnable() {
@@ -21,6 +23,7 @@ public final class SimpleVoiceRadio extends JavaPlugin {
 
         this.radioManager = new RadioManager(this);
         this.radioManager.load();
+        this.configManager = new ConfigManager(this);
 
         getServer().getPluginManager().registerEvents(new RadioSetupListener(radioManager), this);
         getServer().getPluginManager().registerEvents(new RadioInteractListener(radioManager), this);
@@ -53,6 +56,10 @@ public final class SimpleVoiceRadio extends JavaPlugin {
 
     public RadioManager getRadioManager() {
         return this.radioManager;
+    }
+
+    public ConfigManager getConfigManager() {
+        return configManager;
     }
 
     public static SimpleVoiceRadio getInstance() {

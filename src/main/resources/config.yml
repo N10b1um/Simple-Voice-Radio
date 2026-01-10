@@ -1,0 +1,14 @@
+# distance settings
+settings:
+  default-range: 50
+  max-frequency: 12000
+  min-frequency: 8000
+
+# ItemsAdder blocks list (Namespace:ID)
+blocks:
+  transmitters:
+    - "myaddon:broadcast_station"
+    - "myaddon:example_id"
+  receivers:
+    - "myaddon:redstone_receiver"
+    - "myaddon:one_more_example_id"
