@@ -34,9 +34,9 @@ public class ConfigManager {
     }
 
     private void loadSection(FileConfiguration config, String path, RadioType type) {
-        List<String> ids = config.getStringList(path);
-        for (String id : ids) {
-            blockTypes.put(id, type);
+        List<String> materials = config.getStringList(path);
+        for (String matName : materials) {
+            blockTypes.put(matName, type);
         }
     }
 

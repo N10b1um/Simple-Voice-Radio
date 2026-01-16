@@ -7,8 +7,6 @@ settings:
 # ItemsAdder blocks list (Namespace:ID)
 blocks:
   transmitters:
-    - "myaddon:broadcast_station"
-    - "myaddon:example_id"
+    - "JUKEBOX"
   receivers:
-    - "myaddon:redstone_receiver"
-    - "myaddon:one_more_example_id"
+    - "IRON_BLOCK"

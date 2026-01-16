@@ -1,5 +1,6 @@
 package me.n10b1um.simplevoiceradio.listener;
 
+import me.n10b1um.simplevoiceradio.gui.GuiManager;
 import me.n10b1um.simplevoiceradio.manager.RadioManager;
 import me.n10b1um.simplevoiceradio.model.RadioBlock;
 import org.bukkit.Sound;
@@ -14,9 +15,10 @@ import org.bukkit.inventory.EquipmentSlot;
 public class RadioInteractListener implements Listener {
 
     private final RadioManager radioManager;
-
-    public RadioInteractListener(RadioManager radioManager) {
+    private final GuiManager guiManager;
+    public RadioInteractListener(RadioManager radioManager, GuiManager guiManager) {
         this.radioManager = radioManager;
+        this.guiManager = guiManager;
     }
 
     @EventHandler
@@ -33,34 +35,6 @@ public class RadioInteractListener implements Listener {
         Player player = event.getPlayer();
         event.setCancelled(true);
 
-        if (player.isSneaking()) {
-            changeFrequency(player, radio);
-        } else {
-            showInfo(player, radio);
-        }
-    }
-
-    private void showInfo(Player player, RadioBlock radio) {
-        player.sendMessage("§8[§bRadio§8] §fПараметры устройства:");
-
-        double visualFreq = radio.getFrequency() / 100.0;
-        player.sendMessage("§7- Частота: §e" + visualFreq + " FM");
-        player.sendMessage("§7- Тип: §f" + radio.getType());
-
-        player.playSound(player.getLocation(), Sound.BLOCK_LEVER_CLICK, 0.5f, 1f);
-    }
-
-    private void changeFrequency(Player player, RadioBlock radio) {
-        int newFreq = radio.getFrequency() + 50;
-
-        if (newFreq > 12000) {
-            newFreq = 8000;
-        }
-
-        radio.setFrequency(newFreq);
-
-        double visualFreq = newFreq / 100.0;
-        player.sendMessage("§8[§bRadio§8] §aЧастота изменена: §e" + visualFreq + " FM");
-        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1f, 2f);
+        guiManager.openRadioMenu(player, radio);
     }
 }

@@ -1,7 +1,9 @@
 package me.n10b1um.simplevoiceradio;
 
 import me.n10b1um.simplevoiceradio.config.ConfigManager;
+import me.n10b1um.simplevoiceradio.gui.GuiManager;
 import me.n10b1um.simplevoiceradio.integration.VoiceChatIntegration;
+import me.n10b1um.simplevoiceradio.listener.GuiListener;
 import me.n10b1um.simplevoiceradio.listener.RadioBreakListener;
 import me.n10b1um.simplevoiceradio.listener.RadioInteractListener;
 import me.n10b1um.simplevoiceradio.listener.RadioSetupListener;
@@ -24,10 +26,12 @@ public final class SimpleVoiceRadio extends JavaPlugin {
         this.radioManager = new RadioManager(this);
         this.radioManager.load();
         this.configManager = new ConfigManager(this);
+        GuiManager guiManager = new GuiManager();
 
         getServer().getPluginManager().registerEvents(new RadioSetupListener(radioManager), this);
-        getServer().getPluginManager().registerEvents(new RadioInteractListener(radioManager), this);
+        getServer().getPluginManager().registerEvents(new RadioInteractListener(radioManager, guiManager), this);
         getServer().getPluginManager().registerEvents(new RadioBreakListener(radioManager), this);
+        getServer().getPluginManager().registerEvents(new GuiListener(guiManager), this);
 
         if (getServer().getPluginManager().getPlugin("voicechat") == null) {
             getLogger().warning("SimpleVoiceChat plugin not found! Radio will not work.");
